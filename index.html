@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>7th Grade Grades</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    #fadeText {
+      font-size: 2rem;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+      margin-bottom: 20px;
+    }
+
+    #startButton {
+  display: none;
+  padding: 20px 40px;
+  background-color: #8ae3e7;
+  border: none;
+  color: #000;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border-radius: 50px;
+  box-shadow: 0 4px 15px rgba(3, 247, 255, 0.3), 0 4px 25px rgba(31, 165, 255, 0.4);
+  transition: all 0.3s ease-in-out;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Hidden Text -->
+  <div id="fadeText"></div>
+  
+  <!-- Button -->
+  <button id="startButton" onclick="startTextSequence()">Start</button>
+
+  <script>
+    // Wait for the page to load
+    window.onload = function() {
+      document.getElementById("startButton").style.display = "block";
+    };
+
+    const textArray = [
+      "Welcome to the test sequence...",
+      "This is the second message.",
+      "Here comes the third one!",
+      "Final message coming up!"
+    ];
+    
+    let currentIndex = 0;
+    const fadeTextElement = document.getElementById("fadeText");
+    const buttonElement = document.getElementById("startButton");
+
+    // Start the text sequence
+    function startTextSequence() {
+      buttonElement.style.display = "none";  // Hide the button after it's clicked
+      showNextText();
+    }
+
+    // Show the next text with fade effect
+    function showNextText() {
+      if (currentIndex < textArray.length) {
+        fadeTextElement.textContent = textArray[currentIndex];
+        fadeTextElement.style.opacity = 1;  // Make text visible
+        currentIndex++;
+        
+        // After 2 seconds, fade out and then show the next text
+        setTimeout(() => {
+          fadeTextElement.style.opacity = 0;
+          setTimeout(showNextText, 2000);  // Wait 2 seconds after fading out before next message
+        }, 1500);
+      } else {
+        // After last text, redirect to slides.html
+        setTimeout(() => {
+          window.location.href = "slides.html";  // Redirect after all text is shown
+        }, 1500);  // Wait 2 seconds before redirecting
+      }
+    }
+  </script>
+</body>
+</html>

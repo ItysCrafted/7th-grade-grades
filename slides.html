@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>7th Grade Grades</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      perspective: 2000px;
+      overflow: hidden;
+    }
+
+    .cylinder {
+      position: relative;
+      width: 600px;
+      height: 400px;
+      transform-style: preserve-3d;
+      transform: rotateY(0deg);
+    }
+
+    .slide {
+      position: absolute;
+      width: 600px;
+      height: 400px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 20px;
+      box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
+    }
+
+    :root {
+      --sides: 7;
+      --radius: 925px;
+    }
+  </style>
+</head>
+<body>
+  <div class="cylinder" id="cylinder">
+    <!-- 7 Slides -->
+    <div class="slide" style="transform: rotateY(0deg) translateZ(var(--radius)); background-image: url('slide-1.png');"></div>
+    <div class="slide" style="transform: rotateY(51.43deg) translateZ(var(--radius)); background-image: url('slide-2.png');"></div>
+    <div class="slide" style="transform: rotateY(102.86deg) translateZ(var(--radius)); background-image: url('slide-3.png');"></div>
+    <div class="slide" style="transform: rotateY(154.29deg) translateZ(var(--radius)); background-image: url('slide-4.png');"></div>
+    <div class="slide" style="transform: rotateY(205.71deg) translateZ(var(--radius)); background-image: url('slide-5.png');"></div>
+    <div class="slide" style="transform: rotateY(257.14deg) translateZ(var(--radius)); background-image: url('slide-6.png');"></div>
+    <div class="slide" style="transform: rotateY(308.57deg) translateZ(var(--radius)); background-image: url('slide-7.png');"></div>
+  </div>
+
+  <script>
+    const cylinder = document.getElementById("cylinder");
+    const totalSlides = 7;
+    const angleStep = 360 / totalSlides;
+    let currentAngle = 0;
+    let nextAngle = angleStep;
+    let animationStart = null;
+    const duration = 6000; // duration per face (ms)
+
+    function easeInOutSine(t) {
+      return -(Math.cos(Math.PI * t) - 1) / 2;
+    }
+
+    function animate(timestamp) {
+      if (!animationStart) animationStart = timestamp;
+      const elapsed = timestamp - animationStart;
+      let t = elapsed / duration;
+
+      if (t > 1) t = 1;
+
+      const eased = easeInOutSine(t);
+      const interpolated = currentAngle + (nextAngle - currentAngle) * eased;
+      cylinder.style.transform = `rotateY(${-interpolated}deg)`;
+
+      if (t < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        currentAngle = nextAngle;
+        nextAngle += angleStep;
+        animationStart = null;
+        requestAnimationFrame(animate);
+      }
+    }
+
+    requestAnimationFrame(animate);
+  </script>
+</body>
+</html>
