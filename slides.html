@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>7th Grade Grades</title>
+  <title>Smoothest 3D Slideshow (8 slides)</title>
   <style>
     body {
       margin: 0;
@@ -35,31 +35,32 @@
     }
 
     :root {
-      --sides: 7;
+      --sides: 8;
       --radius: 925px;
     }
   </style>
 </head>
 <body>
   <div class="cylinder" id="cylinder">
-    <!-- 7 Slides -->
+    <!-- 8 Slides -->
     <div class="slide" style="transform: rotateY(0deg) translateZ(var(--radius)); background-image: url('slide-1.png');"></div>
-    <div class="slide" style="transform: rotateY(51.43deg) translateZ(var(--radius)); background-image: url('slide-2.png');"></div>
-    <div class="slide" style="transform: rotateY(102.86deg) translateZ(var(--radius)); background-image: url('slide-3.png');"></div>
-    <div class="slide" style="transform: rotateY(154.29deg) translateZ(var(--radius)); background-image: url('slide-4.png');"></div>
-    <div class="slide" style="transform: rotateY(205.71deg) translateZ(var(--radius)); background-image: url('slide-5.png');"></div>
-    <div class="slide" style="transform: rotateY(257.14deg) translateZ(var(--radius)); background-image: url('slide-6.png');"></div>
-    <div class="slide" style="transform: rotateY(308.57deg) translateZ(var(--radius)); background-image: url('slide-7.png');"></div>
+    <div class="slide" style="transform: rotateY(45deg) translateZ(var(--radius)); background-image: url('slide-2.png');"></div>
+    <div class="slide" style="transform: rotateY(90deg) translateZ(var(--radius)); background-image: url('slide-3.png');"></div>
+    <div class="slide" style="transform: rotateY(135deg) translateZ(var(--radius)); background-image: url('slide-4.png');"></div>
+    <div class="slide" style="transform: rotateY(180deg) translateZ(var(--radius)); background-image: url('slide-5.png');"></div>
+    <div class="slide" style="transform: rotateY(225deg) translateZ(var(--radius)); background-image: url('slide-6.png');"></div>
+    <div class="slide" style="transform: rotateY(270deg) translateZ(var(--radius)); background-image: url('slide-7.png');"></div>
+    <div class="slide" style="transform: rotateY(315deg) translateZ(var(--radius)); background-image: url('slide-8.png');"></div>
   </div>
 
   <script>
     const cylinder = document.getElementById("cylinder");
-    const totalSlides = 7;
+    const totalSlides = 8;
     const angleStep = 360 / totalSlides;
     let currentAngle = 0;
     let nextAngle = angleStep;
     let animationStart = null;
-    const duration = 6000; // duration per face (ms)
+    const duration = 600; // duration per face (ms)
 
     function easeInOutSine(t) {
       return -(Math.cos(Math.PI * t) - 1) / 2;
